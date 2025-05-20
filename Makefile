@@ -8,3 +8,6 @@ build:
 
 %:
 	go run ./cmd/promptsentry $@
+
+test:
+	go test -v ./...

@@ -20,9 +20,9 @@ func GenerateCSVReport(results []scan.ScanResult, cfg *config.Config) {
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
 
-	writer.Write([]string{"Prompt", "Response", "Vulnerable", "Reason"})
+	writer.Write([]string{"Prompt", "Response", "Vulnerable", "Reason", "Confidence"})
 	for _, r := range results {
-		writer.Write([]string{r.Prompt, r.Response, fmt.Sprintf("%v", r.Vulnerable), r.Reason})
+		writer.Write([]string{r.Prompt, r.Response, fmt.Sprintf("%v", r.Vulnerable), r.Reason, r.Confidence})
 	}
 }
 
@@ -37,22 +37,5 @@ func GenerateJSONReport(results []scan.ScanResult, cfg *config.Config) {
 	encoder.SetIndent("", "  ")
 	if err := encoder.Encode(results); err != nil {
 		panic(err)
-	}
-}
-
-func PrintToConsole(results []scan.ScanResult) {
-	for _, r := range results {
-		status := "✅ Safe"
-		if r.Vulnerable {
-			status = "⚠️ Vulnerable"
-		}
-		fmt.Printf(`
-==============================
-Prompt:     %s
-Response:   %s
-Status:     %s
-Reason:     %s
-==============================
-`, r.Prompt, r.Response, status, r.Reason)
 	}
 }
