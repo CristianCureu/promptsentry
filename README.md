@@ -2,7 +2,7 @@
 
 A robust scanner for detecting prompt injection vulnerabilities in LLM endpoints.
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/cristiancureu/prompt-sentry)](https://goreportcard.com/report/github.com/cristiancureu/prompt-sentry)
+[![Go CI](https://github.com/cristiancureu/promptsentry/actions/workflows/go.yml/badge.svg)](https://github.com/cristiancureu/permcheck/actions) [![Go Version](https://img.shields.io/badge/Go-1.24-blue)](https://golang.org/dl/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
