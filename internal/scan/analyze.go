@@ -142,7 +142,7 @@ func AnalyzeResponse(prompt, response string) ScanResult {
 		Prompt:     prompt,
 		Response:   response,
 		Vulnerable: false,
-		Reason:     "no indicators found",
+		Reason:     "no vulnerability indicators detected",
 		Confidence: "low",
 		Severity:   "none",
 	}

@@ -68,17 +68,18 @@ func NewScanCmd(cfg *config.Config) *cobra.Command {
 
 			duration := time.Since(start)
 
-			state.Summary(duration.String(), &cfg)
+			state.Summary(duration.Truncate(time.Second).String(), &cfg)
 
-			switch cfg.Format {
-			case "json":
-				report.GenerateJSONReport(results, &cfg)
-			case "csv":
-				report.GenerateCSVReport(results, &cfg)
-			default:
-				report.GenerateJSONReport(results, &cfg)
+			if len(results) > 0 {
+				switch cfg.Format {
+				case "json":
+					report.GenerateJSONReport(results, &cfg)
+				case "csv":
+					report.GenerateCSVReport(results, &cfg)
+				default:
+					report.GenerateJSONReport(results, &cfg)
+				}
 			}
-
 		},
 	}
 

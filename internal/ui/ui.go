@@ -29,10 +29,10 @@ func (s *ScannerState) PrintResult(result scan.ScanResult) {
 	defer s.mu.Unlock()
 
 	if result.Vulnerable {
-		if result.Severity == "high" {
-			pterm.Error.Printfln("[%s] %s", result.Severity, result.Reason)
+		if result.Severity == "high" || result.Severity == "critical" {
+			pterm.Error.Printfln("%s | severity: %s | confidence: %s", result.Reason, result.Severity, result.Confidence)
 		} else {
-			pterm.Warning.Printfln("[%s] %s", result.Severity, result.Reason)
+			pterm.Warning.Printfln("%s | severity: %s | confidence: %s", result.Reason, result.Severity, result.Confidence)
 		}
 		s.vulnerable++
 	} else {
@@ -45,5 +45,5 @@ func (s *ScannerState) PrintResult(result scan.ScanResult) {
 func (s *ScannerState) Summary(duration string, cfg *config.Config) {
 	fmt.Printf("\n✅ Finished scanning %d prompts in %s\n", s.total, duration)
 	fmt.Printf("⚠️  Vulnerabilities found: %d\n", s.vulnerable)
-	fmt.Printf("\n✅ Full scan report saved to %v.\n", cfg.OutputFile)
+	fmt.Printf("\n✅ Full scan report saved to '%v'.\n", cfg.OutputFile)
 }
